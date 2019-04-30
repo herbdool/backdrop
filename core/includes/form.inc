@@ -4524,8 +4524,11 @@ function theme_file($variables) {
  * @ingroup themeable
  */
 function theme_form_element($variables) {
+  //debug($variables, 'variables');
   $element = &$variables['element'];
 
+  $config_override_info = module_invoke_all('config_override_info');
+  //debug($config_override_info, 'config_override_info');
   // This function is invoked as theme wrapper, but the rendered form element
   // may not necessarily have been processed by form_builder().
   $element += array(
@@ -4533,6 +4536,10 @@ function theme_form_element($variables) {
     '#wrapper_attributes' => array(),
   );
   $attributes = $element['#wrapper_attributes'];
+  //debug($attributes, 'attributes');
+  // If element key matches override info
+  // and if it actually is overridden.
+  $attributes['class'][] = 'config-override';
 
   // Add element #id for #type 'item'.
   if (isset($element['#markup']) && !empty($element['#id'])) {

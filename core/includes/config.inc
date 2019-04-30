@@ -88,9 +88,9 @@ function config_clear($config_file, $option) {
  *   The contents of the requested config option. Returns NULL if the specified
  *   option was not found in the file at all.
  */
-function config_get($config_file, $option = NULL) {
+function config_get($config_file, $option = NULL, $override = FALSE) {
   $config = config($config_file);
-  return $config->get($option);
+  return $config->get($option, $override);
 }
 
 /**
@@ -554,7 +554,9 @@ class Config {
    * @return mixed
    *   The data that was requested.
    */
-  public function get($key = '') {
+  public function get($key = '', $override = FALSE) {
+    global $config_overrides;
+    $file = $this->getName();
     if (!$this->isLoaded) {
       $this->load();
     }
@@ -564,7 +566,7 @@ class Config {
     else {
       $parts = explode('.', $key);
       if (count($parts) == 1) {
-        return isset($this->data[$key]) ? $this->data[$key] : NULL;
+        $return = isset($this->data[$key]) ? $this->data[$key] : NULL;
       }
       else {
         $value = $this->data;
@@ -579,8 +581,10 @@ class Config {
             break;
           }
         }
-        return $key_exists ? $value : NULL;
+        $return = $key_exists ? $value : NULL;
       }
+      $return = (isset($config_overrides[$file][$key]) && $override) ? $config_overrides[$file][$key] : $return;
+      return $return;
     }
   }
 

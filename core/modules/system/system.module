@@ -3979,6 +3979,18 @@ function system_config_info() {
 }
 
 /**
+ * Implements hook_config_override_info().
+ */
+function system_config_override_info() {
+  $overrides['system.core.error_level'] = array(
+    'form_key' => 'error_level',
+    'file' => 'system.core',
+    'key' => 'error_level',
+  );
+  return $overrides;
+}
+
+/**
  * Implements hook_system_info_alter().
  *
  * @deprecated since 1.1

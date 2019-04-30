@@ -818,9 +818,10 @@ function backdrop_settings_initialize() {
   global $base_url, $base_path, $base_root;
 
   // Export these settings.php variables to the global namespace.
-  global $databases, $cookie_domain, $conf, $settings, $installed_profile, $is_https, $base_secure_url, $base_insecure_url, $config_directories;
+  global $databases, $cookie_domain, $conf, $settings, $config_overrides, $installed_profile, $is_https, $base_secure_url, $base_insecure_url, $config_directories;
   $conf = array();
   $settings = array();
+  $config_overrides = array();
 
   $conf_path = conf_path();
   if (file_exists($conf_path . '/settings.php')) {
