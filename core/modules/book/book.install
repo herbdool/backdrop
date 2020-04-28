@@ -113,6 +113,21 @@ function book_update_1000() {
 }
 
 /**
+ * Update Book permissions.
+ *
+ * Grant 'add any content to books' permission to all roles with 'administer
+ * book outlines' permission for backward compatibility.
+ */
+function book_update_1001() {
+  $roles = user_roles(TRUE, NULL, TRUE);
+  foreach ($roles as $role) {
+    if (in_array('administer book outlines', $role->permissions)) {
+      user_role_grant_permissions($role->name, array('add any content to books'));
+    }
+  }
+}
+
+/**
  * @} End of "defgroup updates-7.x-to-1.x"
  * The next series of updates should start at 2000.
  */
