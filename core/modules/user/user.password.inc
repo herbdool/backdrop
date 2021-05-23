@@ -31,16 +31,27 @@ function user_password_reject_weak($username) {
  * @see user_account_form()
  */
 function _user_password_policy_help() {
-  $help = array();
-  $help[] = t('The password cannot be the same as the username or e-mail address.');
-  $help[] = t('The password must be sufficiently long or complex.');
-  $variables = array(
-    'items' => $help,
-    'title' => '',
-    'type' => 'ul',
-    'attributes' => array(),
-  );
-  return theme_item_list($variables);
+  // Label the threshold for the password description.
+  $strength_threshold = config_get('system.core', 'user_password_strength_threshold');
+  $threshold_label = t('excellent');
+  if ($strength_threshold < USER_PASSWORD_STRENGTH_FAIR) {
+    $threshold_label = t('weak');
+  }
+  if ($strength_threshold < USER_PASSWORD_STRENGTH_GOOD) {
+    $threshold_label = t('fair');
+  }
+  if ($strength_threshold < USER_PASSWORD_STRENGTH_STRONG) {
+    $threshold_label = t('good');
+  }
+
+  $criteria = array();
+  $criteria[] = t('The password strength indication must be <em class="password-strength-help-text @threshold">@threshold</em> or better.', array('@threshold' => $threshold_label));
+  $criteria[] = t('The password cannot be the same as the username or e-mail address.');
+  $criteria[] = t('The password must be sufficiently long or complex.');
+
+  $help = t('Passwords will be rejected, unless all of the following criteria are met:') . theme('item_list', array('items' => $criteria, 'type' => 'ul'));
+
+  return $help;
 }
 
 /**
