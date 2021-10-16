@@ -883,13 +883,16 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
             array(
               ':input[name="options[alter][alter_text]"]' => array('checked' => TRUE),
             ),
-            // For Global: Custom text always display patterns. Accomplished by displaying
-            // regardless of text filled in or not.
+            // Make sure that the 'Replacement patterns' fieldset is always
+            // visible for 'Global: Custom text' fields. Accomplished by
+            // displaying it regardless of whether the text field is filled
+            // in or not (hence both TRUE or FALSE for the same condition
+            // below).
             array(
-              ':input[name="options[alter][text]"]' => array('filled' => TRUE),
-            ),
-            array(
-              ':input[name="options[alter][text]"]' => array('filled' => FALSE),
+              ':input[name="options[alter][text]"]' => array(
+                array('filled' => TRUE),
+                array('filled' => FALSE),
+              ),
             ),
             array(
               ':input[name="options[alter][more_link]"]' => array('checked' => TRUE),
