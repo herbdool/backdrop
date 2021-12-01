@@ -3017,6 +3017,10 @@ function _layout_settings_get_group_operations($template_info, $is_default) {
       );
     }
     if (user_access('administer flexible templates')) {
+      $links['edit'] = array(
+        'title' => t('Export to file'),
+        'href' => 'admin/structure/layouts/settings/flexible-template/' . $template_info['name'] . '/export-file',
+      );
       $links['delete'] = array(
         'title' => t('Delete'),
         'href' => 'admin/structure/layouts/settings/flexible-template/' . $template_info['name'] . '/delete',

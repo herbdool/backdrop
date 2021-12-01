@@ -103,6 +103,32 @@ function layout_flexible_template_settings_form_submit($form, &$form_state) {
   $form_state['redirect'] = 'admin/structure/layouts/settings/flexible-template/' . $form_state['values']['machine_name'] . '/configure';
 }
 
+function layout_flexible_template_export_form($form, &$form_state, LayoutFlexibleTemplate $flexible_template) {
+  $form['help'] = array(
+    '#type' => 'help',
+    '#markup' => t('This page allows you to export to a template file.'),
+  );
+  $flexible_template_name = $flexible_template->name;
+  $template = layout_get_layout_template_info($flexible_template_name);
+  $config = array(
+    'is_new' => TRUE,
+    'layout_template' => $flexible_template_name,
+  );
+  $layout = new Layout($config);
+  $template = layout_get_layout_template_info($flexible_template_name);
+
+  backdrop_set_title($template['title']);
+  // @todo need to output the php blocks such as 
+  // print $content['content'];
+  $renderer = layout_create_renderer('standard', $layout);
+  $form['display'] = array(
+    '#title' => t('Template'),
+    '#type' => 'textarea',
+    '#default_value' => $renderer->render(),
+    '#rows' => 30,
+  );
+  return $form;
+}
 /**
  * Form to manage adding and removing rows to a flexible template.
  *

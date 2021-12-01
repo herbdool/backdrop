@@ -121,6 +121,16 @@ function layout_menu() {
     'file' => 'layout.flexible.inc',
   ) + $base;
 
+  $items['admin/structure/layouts/settings/flexible-template/%layout_flexible_tempstore/export-file'] = array(
+    'title' => 'Export flexible layout template to file',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('layout_flexible_template_export_form', 5),
+    'access arguments' => array('administer flexible templates'),
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -10,
+    'file' => 'layout.flexible.inc',
+  ) + $base;
+
   $items['admin/structure/layouts/settings/flexible-template/%layout_flexible_tempstore/delete'] = array(
     'title' => 'Delete flexible layout template',
     'page callback' => 'backdrop_get_form',
