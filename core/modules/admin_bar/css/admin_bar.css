@@ -105,53 +105,70 @@
 }
 
 /* All admin bar menu links. */
-#admin-bar #admin-bar-menu > li > .dropdown > li > a {
-  padding-left: 28px; /* LTR */
-}
 [dir="rtl"] #admin-bar #admin-bar-menu > li > .dropdown > li > a {
   padding-left: 10px;
   padding-right: 28px;
 }
 
+#admin-bar #admin-bar-menu>li>.dropdown>li>a::before {
+  display: none;
+  content: "";
+  vertical-align: middle;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  width: 1rem;
+  height: 1rem;
+  margin-right: .5rem;
+  background: currentColor;
+}
+
 /* Specific admin bar menu links. */
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-dashboard {
-  background: transparent url(../images/tachometer-alt--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu>li>.dropdown>li>a.admin-dashboard::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/speedometer2.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/speedometer2.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-content {
-  background: transparent url(../images/pencil-alt--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-content::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/pencil-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/pencil-fill.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-people {
-  background: transparent url(../images/users--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-people::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/people-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/people-fill.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-appearance {
-  background: transparent url(../images/palette--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-appearance::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/palette-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/palette-fill.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-modules {
-  background: transparent url(../images/puzzle-piece--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-modules::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/puzzle-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/puzzle-fill.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-structure {
-  background: transparent url(../images/layer-group--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-structure::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/stack.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/stack.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-config {
-  background: transparent url(../images/cog--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-config::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/gear-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/gear-fill.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-devel {
-  background: transparent url(../images/code--white--64.png) 5% center no-repeat;
-  background-size: 16px;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-devel::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/code-slash.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/code-slash.svg');
 }
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-reports {
-  background: transparent url(../images/info-circle--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-[dir="rtl"] #admin-bar #admin-bar-menu > li > .dropdown > li > a {
-  background-position: 95% center;
+#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-reports::before {
+  display: inline-block;
+  mask-image: url('/core/misc/bootstrap-icons/info-circle-fill.svg');
+  -webkit-mask-image: url('/core/misc/bootstrap-icons/info-circle-fill.svg');
 }
 
 /* Admin tasks. */
