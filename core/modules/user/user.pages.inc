@@ -152,9 +152,24 @@ function user_pass_submit($form, &$form_state) {
  *   Hashed version of the user's password using user_pass_rehash().
  * @param bool $immediate_login
  *   Skip the change password form and just immediately log in.
+ *
+ * In order to never disclose password reset hashes via referrer headers or
+ * web browser history, this function always issues a redirect when a valid
+ * password reset hash is in the URL.
  */
 function user_pass_reset($uid, $timestamp, $hashed_pass, $immediate_login = FALSE) {
   global $user;
+
+  // Check for a reset hash in the session. Immediately remove it (to prevent it
+  // from being reused, for example if this page is visited again via the
+  // browser history) and store it for later use.
+  if (isset($_SESSION['pass_reset_hash'])) {
+    $session_reset_hash = $_SESSION['pass_reset_hash'];
+    unset($_SESSION['pass_reset_hash']);
+  }
+  else {
+    $session_reset_hash = NULL;
+  }
 
   // When processing the one-time login link, we have to make sure that a user
   // isn't already logged in.
@@ -188,7 +203,36 @@ function user_pass_reset($uid, $timestamp, $hashed_pass, $immediate_login = FALS
         backdrop_set_message(t('You have tried to use a reset password link that has expired. Please request a new one using the form below.'), 'error');
         backdrop_goto('user/password');
       }
-      elseif ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
+      // Validate the reset hash from the URL or from the session.
+      $is_valid = FALSE;
+      if ($account->uid && $timestamp >= $account->login && $timestamp <= $current) {
+        // If the reset hash in the URL is valid, put it in the session and
+        // redirect to the same URL but with the hash replaced by an invalid
+        // one ("confirm"). This prevents disclosing the hash via referrer
+        // headers or web browser history.
+        if ($hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
+          if ($immediate_login) {
+            // The 'login' action redirects directly to the user edit form.
+            $is_valid = TRUE;
+          }
+          else {
+            $_SESSION['pass_reset_hash'] = $hashed_pass;
+            $args = arg();
+            foreach ($args as &$arg) {
+              if ($arg == $hashed_pass) {
+                $arg = 'confirm';
+              }
+            }
+            $path = implode('/', $args);
+            backdrop_goto($path, array('query' => backdrop_get_query_parameters()));
+          }
+        }
+        // If the reset hash from the session is valid, use that.
+        elseif ($session_reset_hash && $session_reset_hash == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
+          $is_valid = TRUE;
+        }
+      }
+      if ($is_valid) {
         if ($immediate_login) {
           $user = $account;
           user_login_finalize();
@@ -246,6 +290,12 @@ function user_pass_reset_form($form, &$form_state, $account) {
     '#type' => 'submit',
     '#value' => t('Save password & log in'),
   );
+
+  // Prevent the browser from storing this page so that the token will
+  // not be visible in the form action if the back button is used to
+  // revisit this page.
+  backdrop_add_http_header('Cache-Control', 'no-store');
+
 
   return $form;
 }
