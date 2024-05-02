@@ -168,7 +168,7 @@ function user_pass_reset($uid, $timestamp, $hashed_pass, $immediate_login = FALS
       $reset_link_account = user_load($uid);
       $is_valid = FALSE;
       if (!empty($reset_link_account) && $timestamp >= $reset_link_account->login && $timestamp <= REQUEST_TIME) {
-        if ($hashed_pass == user_pass_rehash($reset_link_account->pass, $timestamp, $reset_link_account->login, $reset_link_account->uid)) {
+        if ($hashed_pass == user_pass_rehash($reset_link_account->pass, $timestamp, $reset_link_account->login, $reset_link_account->uid, $reset_link_account->mail)) {
           $is_valid = TRUE;
         }
       }
