@@ -1000,13 +1000,22 @@ class FormsElementsLabelsTestCase extends BackdropWebTestCase {
  * Test form element labels, required markers and associated output.
  */
 class FormsElementsDescriptionsTestCase extends BackdropWebTestCase {
+  /**
+   * {inheritdoc}
+   */
   protected $profile = 'testing';
 
-  function setUp() {
+  /**
+   * {inheritdoc}
+   */
+  protected function setUp() {
     parent::setUp('form_test');
   }
 
-  function testFormDescriptions() {
+  /**
+   * Test Form Descriptions.
+   */
+  public function testFormDescriptions() {
     $this->backdropGet('form_test/form-descriptions');
 
     // Check #description placement with #description_display='after'.
