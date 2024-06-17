@@ -4941,9 +4941,9 @@ function theme_form_element($variables) {
 
     switch ($element['#description_display']) {
       case 'before':
-      // It is preferable for screen readers if the help text is near/after the
-      // label of the element. So treat it the same as "before" when it comes to
-      // its placement in that case.
+        // It is preferable for screen readers if the help text is near/after the
+        // label of the element. So treat it the same as "before" when it comes to
+        // its placement in that case.
         $description_before = $description;
         break;
 
@@ -4958,7 +4958,7 @@ function theme_form_element($variables) {
 
   $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
   $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
-  $main_element =  $description_before . $prefix . $element['#children'] . $suffix;
+  $main_element = $description_before . $prefix . $element['#children'] . $suffix;
 
   switch ($element['#title_display']) {
     case 'before':
@@ -5073,7 +5073,7 @@ function theme_form_element_label($variables) {
  *
  * This function will not be called for elements with no description.
  *
- * @param $variables
+ * @param array $variables
  *   An associative array containing:
  *   - element: An associative array containing the properties of the element.
  *
