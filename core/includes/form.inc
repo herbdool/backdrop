@@ -4941,9 +4941,9 @@ function theme_form_element($variables) {
 
     switch ($element['#description_display']) {
       case 'before':
-        // It is preferable for screen readers if the help text is near/after the
-        // label of the element. So treat it the same as "before" when it comes to
-        // its placement in that case.
+        // It is preferable for screen readers if the help text is near/after
+        // the label of the element. So treat it the same as "before" when it
+        // comes to its placement in that case.
         $description_before = $description;
         break;
 
