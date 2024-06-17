@@ -231,6 +231,12 @@ function callback_queue_worker($queue_item_data) {
  *  - "#submit": array of callback functions taking $form and $form_state.
  *  - "#title_display": optional string indicating if and how #title should be
  *    displayed, see theme_form_element() and theme_form_element_label().
+ *  - "#description_display": Description display setting. It can have these values:
+ *   - before: The description is output before the element.
+ *   - after: The description is output after the element. This is the default
+ *     value.
+ *   - invisible: The description is output after the element, hidden visually
+ *     but available to screen readers.
  *
  * @see hook_element_info_alter()
  * @see system_element_info()

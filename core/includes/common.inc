@@ -8135,6 +8135,9 @@ function backdrop_common_theme() {
     'form_element_label' => array(
       'render element' => 'element',
     ),
+    'form_element_description' => array(
+      'render element' => 'element',
+    ),
     'vertical_tabs' => array(
       'render element' => 'element',
     ),
