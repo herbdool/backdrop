@@ -3441,7 +3441,7 @@ function backdrop_css_defaults(array $data = NULL) {
  * Non-preprocessed files should only be added to the page when they are
  * actually needed.
  *
- * @param $data
+ * @param array|null $data
  *   (optional) The stylesheet data to be added, depending on what is passed
  *   through to the $options['type'] parameter:
  *   - 'file': The path to the CSS file relative to the base_path(), or a
@@ -3458,7 +3458,7 @@ function backdrop_css_defaults(array $data = NULL) {
  *   - 'external': The absolute path to an external CSS file that is not hosted
  *     on the local server. These files will not be aggregated if CSS
  *     aggregation is enabled.
- * @param $options
+ * @param array|null $options
  *   (optional) A string defining the 'type' of CSS that is being added in the
  *   $data parameter ('file', 'inline', or 'external'), or an array which can
  *   have any or all of the following keys:
@@ -3529,7 +3529,7 @@ function backdrop_css_defaults(array $data = NULL) {
  *
  * @see backdrop_get_css()
  */
-function backdrop_add_css($data = NULL, $options = NULL) {
+function backdrop_add_css(array $data = NULL, $options = NULL) {
   $css = &backdrop_static(__FUNCTION__, array());
   $count = &backdrop_static(__FUNCTION__ . '_count', 0);
 
