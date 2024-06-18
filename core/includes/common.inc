@@ -3309,7 +3309,7 @@ function backdrop_map_assoc($array, $function = NULL) {
  * not possible to reliably ensure that PHP or a security extension will
  * not issue a warning/error if they prevent the use of this function.
  *
- * @param $time_limit
+ * @param int $time_limit
  *   An integer specifying the new time limit, in seconds. A value of 0
  *   indicates unlimited execution time.
  *
@@ -3328,12 +3328,12 @@ function backdrop_set_time_limit($time_limit) {
 /**
  * Returns the path to a system item (module, theme, etc.).
  *
- * @param $type
+ * @param string $type
  *   The type of the item (i.e. theme, theme_engine, module, profile).
- * @param $name
+ * @param string $name
  *   The name of the item for which the path is requested.
  *
- * @return
+ * @return string
  *   The path to the requested item or an empty string if the item is not found.
  */
 function backdrop_get_path($type, $name) {
@@ -3363,9 +3363,9 @@ function base_path() {
  * a link will overwrite a prior link with the exact same 'rel' and 'href'
  * attributes.
  *
- * @param $attributes
+ * @param array $attributes
  *   Associative array of element attributes including 'href' and 'rel'.
- * @param $header
+ * @param bool $header
  *   Optional flag to determine if a HTTP 'Link:' header should be sent.
  */
 function backdrop_add_html_head_link($attributes, $header = FALSE) {
@@ -3388,7 +3388,7 @@ function backdrop_add_html_head_link($attributes, $header = FALSE) {
 /**
  * Constructs an array of the defaults that are used for styles items.
  *
- * @param array $data
+ * @param array|null $data
  *   (optional) The default data parameter for the style item array.
  *
  * @see backdrop_get_css()
@@ -3399,7 +3399,7 @@ function backdrop_add_html_head_link($attributes, $header = FALSE) {
  *
  * @since 1.19.0 Function added.
 */
-function backdrop_css_defaults($data = NULL) {
+function backdrop_css_defaults(array $data = NULL) {
   return array(
     'type' => 'file',
     'group' => CSS_DEFAULT,
