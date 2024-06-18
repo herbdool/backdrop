@@ -3399,7 +3399,7 @@ function backdrop_add_html_head_link($attributes, $header = FALSE) {
  *
  * @since 1.19.0 Function added.
 */
-function backdrop_css_defaults(array $data = NULL) {
+function backdrop_css_defaults($data = NULL) {
   return array(
     'type' => 'file',
     'group' => CSS_DEFAULT,
@@ -3529,7 +3529,7 @@ function backdrop_css_defaults(array $data = NULL) {
  *
  * @see backdrop_get_css()
  */
-function backdrop_add_css(array $data = NULL, $options = NULL) {
+function backdrop_add_css($data = NULL, $options = NULL) {
   $css = &backdrop_static(__FUNCTION__, array());
   $count = &backdrop_static(__FUNCTION__ . '_count', 0);
 
