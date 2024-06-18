@@ -4962,11 +4962,11 @@ function theme_form_element($variables) {
 
   switch ($element['#title_display']) {
     case 'before':
+    case 'invisible':
       $output .= ' ' . $label . ' ' . $main_element . "\n";
       break;
 
     case 'after':
-    case 'invisible':
       $output .= ' ' . $main_element . ' ' . $label . "\n";
       break;
 
@@ -5081,7 +5081,7 @@ function theme_form_element_label($variables) {
  *
  * @ingroup themeable
  */
-function theme_form_element_description($variables) {
+function theme_form_element_description(array $variables) {
   $element = $variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
