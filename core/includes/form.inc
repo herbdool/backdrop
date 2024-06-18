@@ -4898,6 +4898,7 @@ function theme_form_element($variables) {
   // may not necessarily have been processed by form_builder().
   $element += array(
     '#title_display' => 'before',
+    '#description_display' => 'after',
     '#wrapper_attributes' => array(),
   );
   $attributes = $element['#wrapper_attributes'];
