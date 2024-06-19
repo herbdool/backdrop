@@ -1164,6 +1164,61 @@ function form_description_test_form() {
     '#description_display' => 'invisible',
   );
 
+  $form['form_checkboxes_test_description_before'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Checkboxes test for description before element'),
+    '#description' => 'Checkboxes test for description before element',
+    '#options' => array(
+      'first-checkbox' => t('First checkbox'),
+      'second-checkbox' => t('Second checkbox'),
+    ),
+  );
+
+  $form['form_radios_test_description_before'] = array(
+    '#type' => 'radios',
+    '#title' => 'Radios test for description before element',
+    '#description' => 'Radios test for description before element',
+    '#options' => array(
+      'first-radio' => 'First radio',
+      'second-radio' => 'Second radio',
+    ),
+  );
+
+  $form['form_textarea_test_description_before'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Textarea test for description before element'),
+    '#description' => 'Radios test for description before element',
+  );
+
+  $form['form_checkboxes_test_description_after'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Checkboxes test for description after element'),
+    '#description' => 'Checkboxes test for description after element',
+    '#description_display' => 'after',
+    '#options' => array(
+      'first-checkbox' => t('First checkbox'),
+      'second-checkbox' => t('Second checkbox'),
+    ),
+  );
+
+  $form['form_radios_test_description_after'] = array(
+    '#type' => 'radios',
+    '#title' => t('Radios test for description after element'),
+    '#description' => 'Radios test for description after element',
+    '#description_display' => 'after',
+    '#options' => array(
+      'first-radio' => 'First radio',
+      'second-radio' => 'Second radio',
+    ),
+  );
+
+  $form['form_textarea_test_description_after'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Textarea test for description after element'),
+    '#description' => 'Radios test for description after element',
+    '#description_display' => 'after',
+  );
+
   return $form;
 }
 
