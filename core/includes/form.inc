@@ -4955,6 +4955,8 @@ function theme_form_element($variables) {
     }
   }
 
+  $label = theme('form_element_label', $variables);
+
   $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
   $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
   $main_element = $description_before . $prefix . $element['#children'] . $suffix;
@@ -4962,11 +4964,11 @@ function theme_form_element($variables) {
   switch ($element['#title_display']) {
     case 'before':
     case 'invisible':
-      $output .= ' ' . theme('form_element_label', $variables) . ' ' . $main_element . "\n";
+      $output .= ' ' . $label . ' ' . $main_element . "\n";
       break;
 
     case 'after':
-      $output .= ' ' . $main_element . ' ' . theme('form_element_label', $variables) . "\n";
+      $output .= ' ' . $main_element . ' ' . $label . "\n";
       break;
 
     case 'none':
@@ -5037,7 +5039,7 @@ function theme_form_element_label($variables) {
   // If the element is required, a required marker is appended to the label.
   $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
 
-  $title = filter_xss_admin($element['#title']);
+  $title = empty($element['#title']) ? $element['#parents'][0] : filter_xss_admin($element['#title']);
 
   $attributes = array();
   // Style the label as class option to display inline with the element.
