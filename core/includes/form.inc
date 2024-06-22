@@ -5039,7 +5039,7 @@ function theme_form_element_label($variables) {
   // If the element is required, a required marker is appended to the label.
   $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
 
-  $title = filter_xss_admin($element['#title']);
+  $title = empty($element['#title']) ? $element['#parents'][0] : filter_xss_admin($element['#title']);
 
   $attributes = array();
   // Style the label as class option to display inline with the element.
