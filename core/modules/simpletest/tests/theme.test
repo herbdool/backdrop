@@ -884,11 +884,11 @@ class ThemeDebugMarkupTestCase extends BackdropWebTestCase {
     $node = $this->backdropCreateNode();
     $this->backdropGet("node/$node->nid");
     $this->assertRaw('<!-- THEME DEBUG -->', 'Theme debug markup found in theme output when debug is enabled.');
-    $this->assertRaw("CALL: theme('node__page__full')", 'Theme call information found.');
+    $this->assertRaw("CALL: theme('node')", 'Theme call information found.');
     $debug_output = <<<EOL
+   x node--{$node->nid}.tpl.php
    * node--page--full.tpl.php
    * node--page.tpl.php
-   x node--{$node->nid}.tpl.php
    * node.tpl.php
 EOL;
     $this->assertRaw($debug_output, 'Suggested template files found in order and node ID specific template shown as current template.');
@@ -900,9 +900,9 @@ EOL;
     $node2 = $this->backdropCreateNode();
     $this->backdropGet("node/$node2->nid");
     $debug_output = <<<EOL
+   * node--{$node2->nid}.tpl.php
    * node--page--full.tpl.php
    * node--page.tpl.php
-   * node--{$node2->nid}.tpl.php
    x node.tpl.php
 EOL;
     $this->assertRaw($debug_output, 'Suggested template files found in order and base template shown as current template.');
@@ -918,6 +918,8 @@ EOL;
    * node--foo--bar.tpl.php
    * node--foo.tpl.php
    * node--{$node3->nid}.tpl.php
+   * node--page--full.tpl.php
+   * node--page.tpl.php
    x node.tpl.php
 EOL;
     $this->assertTrue(strpos($output, $debug_output) !== FALSE, 'Suggested template files found in order and base template shown as current template.');

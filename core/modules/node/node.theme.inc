@@ -294,6 +294,9 @@ function template_preprocess_node(&$variables) {
     $variables['node_url'] = FALSE;
   }
 
+  $variables['theme_hook_suggestions'][] = 'node__' . $node->type;
+  $variables['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $variables['view_mode'];
+
   // Add an extra theme hook suggestion for node id.
   $variables['theme_hook_suggestions'][] = 'node__' . $node->nid;
 
