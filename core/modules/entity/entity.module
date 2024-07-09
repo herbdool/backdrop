@@ -740,6 +740,73 @@ function entity_view_mode_prepare($entity_type, $entities, $view_mode, $langcode
 }
 
 /**
+ * Implements hook_preprocess().
+ *
+ * Add template suggestions for an entity based on view modes if they do not
+ * already exist.
+ *
+ * The eventual order of the entity's theme suggestions are:
+ * - entity-type__bundle (lowest priority = first in the array)
+ * - entity-type__bundle__view-mode
+ * - entity-type__id
+ * - entity-type__id__view-mode (highest priority = last in the array)
+ *
+ * @see entity_view_mode_entity_view()
+ */
+function entity_preprocess(&$variables, $hook) {
+  // Check for the context provided in entity_view_mode_entity_view().
+  if (!empty($variables['elements']['#view_mode'])) {
+
+    // Sometimes a rendered entity is passed into another theme function, in
+    // which case we should not process. But also account that #theme may be a
+    // hook suggestion itself. For example. #theme = 'comment__node_type'
+    // and $hook = 'comment'.
+    if ($variables['elements']['#theme'] != $hook && strpos($variables['elements']['#theme'], $hook . '__') !== 0) {
+      return;
+    }
+
+    $view_mode = $variables['elements']['#view_mode'];
+    foreach ($variables['elements'] as $item) {
+      if (is_a($item, 'EntityInterface')) {
+        $entity = $item;
+      }
+    }
+    $entity_type = $entity->entityType();
+    $bundle = $entity->bundle();
+    $id = $entity->id();
+    $has_bundles = TRUE;
+    if ($entity_type == $bundle) {
+      $info = entity_get_info($entity_type);
+      if (empty($info['entity keys']['bundle'])) {
+        $has_bundles = FALSE;
+      }
+    }
+
+    $suggestions = &$variables['theme_hook_suggestions'];
+
+    // Ensure the base suggestions exist and if not, add them.
+    if ($has_bundles && !in_array("{$entity_type}__{$bundle}", $suggestions)) {
+      // The entity-type__bundle suggestion is typically "first".
+      array_unshift($suggestions, "{$entity_type}__{$bundle}");
+    }
+    if (!in_array("{$entity_type}__{$id}", $suggestions)) {
+      // The entity-type__id suggestion is always "last".
+      array_push($suggestions, "{$entity_type}__{$id}");
+    }
+
+    // Add view mode suggestions based on the location of the base suggestions.
+    if ($has_bundles && !in_array("{$entity_type}__{$bundle}__{$view_mode}", $suggestions)) {
+      $index = array_search("{$entity_type}__{$bundle}", $suggestions);
+      array_splice($suggestions, $index + 1, 0, "{$entity_type}__{$bundle}__{$view_mode}");
+    }
+    if (!in_array("{$entity_type}__{$id}__{$view_mode}", $suggestions)) {
+      $index = array_search("{$entity_type}__{$id}", $suggestions);
+      array_splice($suggestions, $index + 1, 0, "{$entity_type}__{$id}__{$view_mode}");
+    }
+  }
+}
+
+/**
  * Returns the URI elements of an entity.
  *
  * @param $entity_type
