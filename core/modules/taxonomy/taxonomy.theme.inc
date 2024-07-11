@@ -165,7 +165,7 @@ function theme_taxonomy_overview_terms($variables) {
  * Process variables for taxonomy-term.tpl.php.
  */
 function template_preprocess_taxonomy_term(&$variables) {
-  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $view_mode = $variables['view_mode'] = $variables['elements']['#view_mode'];
   $variables['term'] = $variables['elements']['#term'];
   $term = $variables['term'];
 
@@ -195,8 +195,8 @@ function template_preprocess_taxonomy_term(&$variables) {
 
   // Add extra theme hook suggestions for taxonomy term vocabulary, view_mode and id.
   $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary;
-  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary . '__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary . '__' . $view_mode;
   $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid;
-  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid . '__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid . '__' . $view_mode;
 }
 
