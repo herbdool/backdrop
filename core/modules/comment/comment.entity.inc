@@ -505,7 +505,7 @@ class CommentStorageController extends EntityDatabaseStorageController {
       unset($comment->content);
 
       $build += array(
-        '#theme' => 'comment__node_' . $node->type . '__' . $view_mode,
+        '#theme' => 'comment__node_' . $node->type,
         '#comment' => $comment,
         '#node' => $node,
         '#view_mode' => $view_mode,

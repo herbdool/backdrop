@@ -77,7 +77,7 @@ function theme_comment_post_forbidden($variables) {
  * @see comment.tpl.php
  */
 function template_preprocess_comment(&$variables) {
-  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $view_mode = $variables['view_mode'] = $variables['elements']['#view_mode'];
   $variables['bundle'] = $variables['elements']['#bundle'];
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
@@ -104,7 +104,7 @@ function template_preprocess_comment(&$variables) {
 
   $uri = $comment->uri();
   $uri['options'] += array('attributes' => array('class' => array('permalink'), 'rel' => 'bookmark'));
-  
+
   $variables['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $variables['permalink_path'] = $uri['path'] . "#" . $uri['options']['fragment'];
   $variables['title_display'] = $node_type->settings['comment_title_options'] != COMMENT_TITLE_HIDDEN;
@@ -156,7 +156,10 @@ function template_preprocess_comment(&$variables) {
   else {
     $variables['classes'][] = 'comment-title-custom';
   }
-  
+
   // Gather classes specific to the comment title.
   $variables['title_classes'][] = 'comment-title';
+
+  // Add extra theme hook suggestions for comment view_mode.
+  $variables['theme_hook_suggestions'][] = 'comment__node_' . $node->type . '__' . $view_mode;
 }
