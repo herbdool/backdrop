@@ -917,6 +917,7 @@ EOL;
     $debug_output = <<<EOL
    * node--foo--bar.tpl.php
    * node--foo.tpl.php
+   * node--{$node3->nid}--full.tpl.php
    * node--{$node3->nid}.tpl.php
    * node--page--full.tpl.php
    * node--page.tpl.php
