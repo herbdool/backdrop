@@ -300,7 +300,6 @@ function template_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = 'node__' . $node->nid;
   $variables['theme_hook_suggestions'][] = 'node__' . $node->nid . '__' . $variables['view_mode'];
 
-
   // Add a legacy theme hook suggestion for content block. @todo remove in 2.x.
   if (strstr($variables['theme_hook_original'], 'node_block')) {
     $variables['theme_hook_suggestions'][] = 'node__block_' . $node->nid;

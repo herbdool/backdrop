@@ -154,7 +154,11 @@ function theme_taxonomy_overview_terms($variables) {
     $header[] = t('Weight');
   }
   $header[] = t('Operations');
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'taxonomy')));
+  $output .= theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+    'attributes' => array('id' => 'taxonomy'),
+  ));
   $output .= backdrop_render_children($form);
   $output .= theme('pager');
 
