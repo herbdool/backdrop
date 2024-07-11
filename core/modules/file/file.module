@@ -971,6 +971,7 @@ function template_preprocess_file_entity(&$variables) {
   }
 
   // Clean up name so there are no underscores.
+  $variables['theme_hook_suggestions'][] = 'file';
   $variables['theme_hook_suggestions'][] = 'file__' . $file->type;
   $variables['theme_hook_suggestions'][] = 'file__' . $file->type . '__' . $view_mode;
   $variables['theme_hook_suggestions'][] = 'file__' . str_replace(array('/', '-'), array('__', '_'), $file->filemime);
