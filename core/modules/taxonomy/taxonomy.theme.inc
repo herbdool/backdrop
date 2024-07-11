@@ -192,5 +192,11 @@ function template_preprocess_taxonomy_term(&$variables) {
   // Gather classes, and clean up name so there are no underscores.
   $vocabulary_name_css = backdrop_clean_css_identifier($term->vocabulary);
   $variables['classes'][] = 'vocabulary-' . $vocabulary_name_css;
+
+  // Add extra theme hook suggestions for taxonomy term vocabulary, view_mode and id.
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary;
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary . '__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid;
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid . '__' . $variables['view_mode'];
 }
 
