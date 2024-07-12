@@ -151,6 +151,10 @@ function list_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
   $field = $form['#field'];
 
   if (in_array($field['type'], array('list_integer', 'list_float', 'list_text'))) {
+    // If the allowed values are set automatically skip setting the widget.
+    if ($field['settings']['allowed_values_function']) {
+      return;
+    }
 
     // Use options_element default widget instead of field widget.
     $form['instance']['default_value_widget']['#access'] = FALSE;
