@@ -151,7 +151,7 @@ function list_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
 
   if (in_array($field['type'], array('list_integer', 'list_float', 'list_text'))) {
     // If the default value is set automatically skip setting the widget.
-    if ($form['instance']['default_value_function']) {
+    if ($form['#instance']['default_value_function']) {
       return;
     }
 
