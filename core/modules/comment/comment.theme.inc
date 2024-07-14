@@ -159,7 +159,4 @@ function template_preprocess_comment(&$variables) {
 
   // Gather classes specific to the comment title.
   $variables['title_classes'][] = 'comment-title';
-
-  // Add extra theme hook suggestions for comment view_mode.
-  $variables['theme_hook_suggestions'][] = 'comment__node_' . $node->type . '__' . $view_mode;
 }
