@@ -888,6 +888,7 @@ class ThemeDebugMarkupTestCase extends BackdropWebTestCase {
     $this->assertRaw('<!-- THEME DEBUG -->', 'Theme debug markup found in theme output when debug is enabled.');
     $this->assertRaw("CALL: theme('node')", 'Theme call information found.');
     $debug_output = <<<EOL
+   * node--{$node->nid}--full.tpl.php
    x node--{$node->nid}.tpl.php
    * node--page--full.tpl.php
    * node--page.tpl.php
@@ -902,6 +903,7 @@ EOL;
     $node2 = $this->backdropCreateNode();
     $this->backdropGet("node/$node2->nid");
     $debug_output = <<<EOL
+   * node--{$node2->nid}--full.tpl.php
    * node--{$node2->nid}.tpl.php
    * node--page--full.tpl.php
    * node--page.tpl.php
