@@ -2014,7 +2014,7 @@ function layout_block_disable_page(Layout $layout, Block $block, $renderer_name)
  *
  * @ingroup forms
  */
-function layout_condition_add_form($form, &$form_state, Layout $layout = NULL, Block $block = NULL, LayoutMenuItem $menu_item = NULL, $condition_id = NULL) {
+function layout_condition_add_form($form, &$form_state, ?Layout $layout = NULL, ?Block $block = NULL, ?LayoutMenuItem $menu_item = NULL, $condition_id = NULL) {
   form_load_include($form_state, 'inc', 'layout', 'layout.admin');
   $form_state['layout'] = $layout;
   $form_state['block'] = $block;
@@ -2317,7 +2317,7 @@ function layout_condition_add_form_submit($form, &$form_state) {
 /**
  * Title callback; Provide the page title for configuring a layout condition.
  */
-function layout_condition_edit_title(Layout $layout = NULL, Block $block = NULL, LayoutMenuItem $menu_item = NULL, $handler_id) {
+function layout_condition_edit_title(?Layout $layout = NULL, ?Block $block = NULL, ?LayoutMenuItem $menu_item = NULL, $handler_id) {
   if (isset($menu_item->conditions[$handler_id])) {
     $plugin_name = $menu_item->conditions[$handler_id]->plugin;
   }

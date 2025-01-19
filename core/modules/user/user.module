@@ -580,7 +580,7 @@ function user_is_blocked($name) {
  *
  * @since 1.14.0 First parameter changed from $rid to $role_name.
  */
-function user_has_role($role_name, User $account = NULL) {
+function user_has_role($role_name, ?User $account = NULL) {
   if (!$account) {
     $account = $GLOBALS['user'];
   }

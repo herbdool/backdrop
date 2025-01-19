@@ -494,7 +494,7 @@ function backdrop_get_feeds($delimiter = "\n") {
  * @return
  *   An array containing query parameters, which can be used for url().
  */
-function backdrop_get_query_parameters(array $query = NULL, array $exclude = array('q'), $parent = '') {
+function backdrop_get_query_parameters(?array $query = NULL, array $exclude = array('q'), $parent = '') {
   // Set defaults, if none given.
   if (!isset($query)) {
     $query = $_GET;
@@ -2538,7 +2538,7 @@ function format_date($timestamp, $date_format_name = 'medium', $pattern = '', $t
  * @return string
  *   The date from $matches as a translated string.
  */
-function _format_date_callback(array $matches = NULL, $new_langcode = NULL) {
+function _format_date_callback(?array $matches = NULL, $new_langcode = NULL) {
   // We cache translations to avoid redundant and rather costly calls to t().
   static $cache, $langcode;
 
